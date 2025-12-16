@@ -1,0 +1,46 @@
+
+:root{
+    --ink:#0B0D12; --paper:#cebbe4; --gold:#D4AF37; --teal:#3bbbb7; --slate:#8A94A6;
+  }
+  *{box-sizing:border-box}
+  html,body{background:var(--paper); color:var(--ink); 
+  font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial}
+  a{color:var(--teal)} 
+  a:hover{text-decoration:underline}
+  img{max-width:100%; display:block}
+  
+  .btn{border-radius:1rem}
+  .btn-primary{background:var(--teal); border-color:var(--teal)}
+  .btn-outline-dark:hover{background:var(--ink); color:#9b0a0a}
+  
+  
+  /* HERO with carousel */
+  .hero .carousel-item{min-height:70vh; background: center/cover no-repeat;}
+  .hero .overlay{position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.65));}
+  .hero .caption{position:absolute; inset:0; display:grid; place-items:center; text-align:center; color:#fff}
+  .hero .headline{font-weight:800; letter-spacing:.4px}
+  
+  /* Cards */
+  .card.room-card{border:none; border-radius:1.25rem; overflow:hidden; background:#fff; box-shadow:0 10px 30px rgba(0,0,0,.06); transition:transform .25s ease, box-shadow .25s ease;}
+  .card.room-card:hover{transform:translateY(-2px); box-shadow:0 16px 40px rgba(0,0,0,.10)}
+  .room-card .price{font-weight:800}
+  .badge-soft{background:#0e918c1a; color:var(--teal); border:1px dashed #0e918c33}
+  
+  .booking-sticky{ position:sticky; top:72px; z-index:30; border-radius:1rem; background:#fff; box-shadow:0 8px 24px rgba(0,0,0,.08); }
+  
+  /* botones anterior y siguiente despues del carousel */
+  .carousel-control-next {
+    text-align: center;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 5%;
+    border-radius: 0 10px 10px 0;
+  }
+
+  .carousel-control-prev {
+    text-align: center;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 5%;
+    border-radius: 10px 0 0 10px;
+  }

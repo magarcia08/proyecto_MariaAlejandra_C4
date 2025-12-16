@@ -1,0 +1,52 @@
+<!DOCTYPE html><html lang="es">
+    <head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Almacen de todo y para todos </title>
+    <link rel="stylesheet" href="css/styles.css">
+    </head>
+    <body>
+    <site-navbar>     
+    </site-navbar>
+    
+    <!-- header para la pantalla de inicio, utilizando la primera pagina en carousel -->
+    <header class="hero position-relative">
+      <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+        <div class="carousel-item active" style="background-image:url('./img/img1.jpg')"></div>
+        
+        </div>
+        <br> <br> <br> <br> <br> <br>
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon"></span><span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon"></span><span class="visually-hidden">Siguiente</span>
+        </button>
+      </div>
+      <div class="overlay"></div>
+      <div class="caption">
+        <div class="container">
+          <h1 class="headline display-5 mb-3">Almacen de todo y para todos</h1>
+          <p class="lead"> Bienvenido, aquí podrás encontrar de todo, averigua todo lo que tenemos para ti y tu familia </p>
+          <a class="btn btn-primary btn-lg" href="productos.html">Buscar productos</a>
+        </div>
+      </div>
+    </header>
+    
+    <main class="container my-5">
+      <h2 class="section-title mb-3">Habitaciones destacadas</h2>
+      <div id="homeRooms" class="row row-cols-1 row-cols-md-3 g-3"></div>
+    </main>
+    
+    <site-footer></site-footer>
+  
+<script type="module">
+  import './app.js';
+  import './js/components/navbar.js';
+  import './js/components/footer.js';
+  import { listRooms } from './js/services/roomService.js';
+  import { roomCard } from './js/components/roomCard.js';
+  const el = document.getElementById('homeRooms');
+  el.innerHTML = listRooms().slice(0,3).map(roomCard).join('');
+</script>
+</body></html>
