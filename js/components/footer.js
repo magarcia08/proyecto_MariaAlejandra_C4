@@ -1,4 +1,4 @@
-// components/footer.js
+// components/footer.jsss
 
   class SiteFooter extends HTMLElement{
     connectedCallback(){

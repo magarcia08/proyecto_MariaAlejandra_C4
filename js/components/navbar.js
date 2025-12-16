@@ -1,4 +1,4 @@
-// components/navbar.js
+// components/navbar.jssss
 import { navbarScrollEffect } from '../utils/ui.js';
 
 

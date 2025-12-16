@@ -1,4 +1,4 @@
-// js/utils/ui.js
+// js/utils/ui.jssss
 
 // Muestra notificaciones simples estilo Bootstrap
 export function toast(msg, type = 'info') {
