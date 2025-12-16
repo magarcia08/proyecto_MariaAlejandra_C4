@@ -11,18 +11,41 @@
   
   .btn{border-radius:1rem}
   .btn-primary{background:var(--teal); border-color:var(--teal)}
-  .btn-outline-dark:hover{background:var(--ink); color:#9b0a0a}
+  .btn-outline-dark:hover{background:var(--ink); color:#b82a2a}
   
   
   /* HERO with carousel */
-  .hero .carousel-item{min-height:70vh; background: center/cover no-repeat;}
-  .hero .overlay{position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.65));}
-  .hero .caption{position:absolute; inset:0; display:grid; place-items:center; text-align:center; color:#fff}
+  .hero .carousel-item{
+    min-height:70vh;
+     background: center/cover no-repeat;}
+
+  .hero .overlay{
+    position:absolute; 
+    inset:0; 
+    background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.65));}
+
+  .hero .caption{
+    position:absolute; 
+    inset:0; 
+    display:grid; 
+    place-items:center; 
+    text-align:center; color:#fff}
+    
   .hero .headline{font-weight:800; letter-spacing:.4px}
   
   /* Cards */
-  .card.room-card{border:none; border-radius:1.25rem; overflow:hidden; background:#fff; box-shadow:0 10px 30px rgba(0,0,0,.06); transition:transform .25s ease, box-shadow .25s ease;}
-  .card.room-card:hover{transform:translateY(-2px); box-shadow:0 16px 40px rgba(0,0,0,.10)}
+  .card.room-card {
+    border:none; 
+    border-radius:1.25rem; 
+    overflow:hidden; 
+    background:#fff; 
+    box-shadow:0 10px 30px rgba(0,0,0,.06); 
+    transition:transform .25s ease, box-shadow .25s ease;}
+
+  .card.room-card:hover{
+    transform:translateY(-2px); 
+    box-shadow:0 16px 40px rgba(0,0,0,.10)}
+
   .room-card .price{font-weight:800}
   .badge-soft{background:#0e918c1a; color:var(--teal); border:1px dashed #0e918c33}
   
@@ -45,4 +68,7 @@
     border-radius: 10px 0 0 10px;
   }
 
-  .badge-soft
+.card.room-card img {
+    height: 200px;
+    object-fit: cover;
+}
