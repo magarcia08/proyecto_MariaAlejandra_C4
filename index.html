@@ -1,69 +1,107 @@
-<!DOCTYPE html><html lang="es">
-    <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-    <title> Almacen de todo y para todos </title>
-    <link rel="stylesheet" href="css/styles.css">
-    </head>
-    <body>
-    <site-navbar>     
-    </site-navbar>
-    
-    <!-- header para la pantalla de inicio, utilizando la primera pagina en carousel -->
-    <header class="hero position-relative">
-      <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-        <div class="carousel-item active" style="background-image:url('./img/img1.jpg')"></div>
-        
-        </div>
-        <br> <br> <br> <br> <br> <br> <br>
-        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon"></span><span class="visually-hidden">Anterior</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-          <span class="carousel-control-next-icon"></span><span class="visually-hidden">Siguiente</span>
-        </button>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Almacén de todo y para todos</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+  <site-navbar></site-navbar>
+
+  <header class="hero">
+    <div class="hero-bg" style="background-image: url('./img/img1.jpg');"></div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content container">
+      <span class="badge-hero">SMART HOUSE</span>
+      <h1>Almacén de todo y para todos</h1>
+      <p>Electrodomésticos y tecnología para tu hogar</p>
+      <div class="hero-buttons">
+        <a href="views/catalogo.html" class="btn-primary">Ver productos</a>
+        <a href="#" class="btn-secondary">Catálogo</a>
       </div>
-      <div class="overlay"></div>
-      <div class="caption">
-        <div class="container">
-          <h1 class="headline display-5 mb-3">Almacen de todo y para todos</h1>
-          <p class="lead"> Bienvenido, aquí podrás encontrar de todo, averigua todo lo que tenemos para ti y tu familia </p>
-          <a class="btn btn-primary btn-lg" href="productos.html">Buscar productos</a>
-        </div>
-      </div> 
+    </div>
 
-      <div id="contenido-principal">
-        <div class="container">
-          <h1 class="entrada-princial "> Nuestros productos </h1>
-            <h2 class="descubre-principal"> Descubre nuestra amplia gama de electrodomésticos y equipos electrónicos</h2>
-        </div>
-        <div class="categorias-principal">
-          <h1> Todos </h1>
-          <h1> Aspiradores </h1>
-          <h1> Electrodomésticos</h1>
-          <h1> Equipos de sonido </h1>
-          <h1> Destacadas </h1>
-          <h1> Lavadores</h1>
-
-        </div>
+    <div class="hero-stats container">
+      <div class="stat">
+        <h3>500+</h3>
+        <p>Productos</p>
       </div>
-    </header>
-    
+      <div class="stat">
+        <h3>24h</h3>
+        <p>Envío</p>
+      </div>
+      <div class="stat">
+        <h3>2 años</h3>
+        <p>Garantía</p>
+      </div>
+      <div class="stat">
+        <h3>24/7</h3>
+        <p>Soporte</p>
+      </div>
+    </div>
+  </header>
 
-    <main class="container my-5">
-      <h2 class="section-title mb-3"> Destacadas</h2>
-      <div id="homeRooms" class="row row-cols-1 row-cols-md-3 g-3"></div>
-    </main>
-    
-    <site-footer></site-footer>
-  
-<script type="module">
-  import './app.js';
-  import './js/components/navbar.js';
-  import './js/components/footer.js';
-  import { listRooms } from './js/services/roomService.js';
-  import { roomCard } from './js/components/roomCard.js';
-  const el = document.getElementById('homeRooms');
-  el.innerHTML = listRooms().slice(0,3).map(roomCard).join('');
-</script>
-</body></html>
+  <main class="container products-section">
+
+    <div class="products-header">
+      <h2>Nuestros productos</h2>
+      <p>Descubre nuestra amplia gama de electrodomésticos y equipos electrónicos</p>
+    </div>
+
+    <div class="products-layout">
+
+      <!-- SIDEBAR -->
+      <aside class="products-sidebar">
+        <h3>Categorías</h3>
+        <ul class="category-list">
+          <li>Todos</li>
+          <li>Aspiradoras</li>
+          <li>Electrodomésticos</li>
+          <li>Equipos de sonido</li>
+          <li>Lavadoras</li>
+          <li>Destacados</li>
+        </ul>
+      </aside>
+
+      <!-- GRID DE PRODUCTOS -->
+      <section class="products-grid">
+
+        <article class="product-card">
+          <span class="product-tag new">Nuevo</span>
+          <img src="./img/product1.png" alt="Producto">
+          <h4>Aspiradora Robot Inteligente</h4>
+          <p class="price">$2.299.000</p>
+        </article>
+
+        <article class="product-card">
+          <span class="product-tag sale">Oferta</span>
+          <img src="./img/product2.png" alt="Producto">
+          <h4>Aspiradora Vertical Dyson</h4>
+          <p class="price">$2.899.000</p>
+        </article>
+
+        <article class="product-card">
+          <img src="./img/product3.png" alt="Producto">
+          <h4>Licuadora Profesional</h4>
+          <p class="price">$899.000</p>
+        </article>
+
+      </section>
+
+    </div>
+  </main>
+
+  <site-footer></site-footer>
+
+  <script type="module">
+    import './app.js';
+    import './js/components/navbar.js';
+    import './js/components/footer.js';
+  </script>
+
+</body>
+</html>
