@@ -72,3 +72,17 @@
     height: 200px;
     object-fit: cover;
 }
+
+.entrada-principal{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    background-color: violet;
+}
+
+.descubre-principal {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    background-color: lightblue;
+}
