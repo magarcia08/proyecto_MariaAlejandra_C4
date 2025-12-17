@@ -14,7 +14,6 @@
     color: var(--dark);
   }
   
-  /* HERO */
   .catalog-hero {
     background: linear-gradient(135deg, var(--purple), var(--purple-dark));
     padding: 80px 20px;
@@ -41,7 +40,6 @@
     font-weight: bold;
   }
   
-  /* CONTENEDOR */
   .catalog-container {
     width: 90%;
     max-width: 1200px;
