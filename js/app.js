@@ -1,154 +1,136 @@
-// URL de la API
+// URL API
 let url = "https://fakestoreapi.com/products";
 
 // Variables globales
 let productos = [];
-let carrito = [];
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-// Elementos del DOM
-let listaProductos = document.getElementById("listaProductos");
-let itemsCarrito = document.getElementById("itemsCarrito");
-let totalCarrito = document.getElementById("totalCarrito");
-let contadorCarrito = document.getElementById("contadorCarrito");
-let filtroCategoria = document.getElementById("filtroCategoria");
-let ordenar = document.getElementById("ordenar");
-let buscador = document.getElementById("buscador");
-
-// Cargar carrito desde localStorage
-if (localStorage.getItem("carrito")) {
-  carrito = JSON.parse(localStorage.getItem("carrito"));
-  actualizarCarrito();
-}
-
-// CONSUMO DE API
+// Obtener productos
 async function obtenerProductos() {
   try {
     let respuesta = await fetch(url);
     productos = await respuesta.json();
+    cargarCategorias();
     mostrarProductos(productos);
-    cargarCategorias(productos);
   } catch (error) {
-    console.log("Error al cargar productos", error);
+    console.log("Error al cargar productos");
   }
 }
 
-// MOSTRAR PRODUCTOS
+// Mostrar productos
 function mostrarProductos(lista) {
-  listaProductos.innerHTML = "";
+  let contenedor = document.getElementById("lista-productos");
+  if (!contenedor) return;
+
+  contenedor.innerHTML = "";
 
   lista.forEach(producto => {
-    let card = document.createElement("div");
-    card.classList.add("card");
-
-    card.innerHTML = `
-      <img src="${producto.image}">
-      <h3>${producto.title}</h3>
-      <p>$ ${producto.price}</p>
-      <button onclick="agregarAlCarrito(${producto.id})">
-        Agregar al carrito
-      </button>
+    contenedor.innerHTML += `
+      <div class="card">
+        <img src="${producto.image}">
+        <h4>${producto.title}</h4>
+        <p>$${producto.price}</p>
+        <button onclick="agregarCarrito(${producto.id})">Agregar</button>
+      </div>
     `;
-
-    listaProductos.appendChild(card);
   });
 }
 
-// CATEGORIAS
-function cargarCategorias(lista) {
-  let categorias = lista.map(p => p.category);
-  let categoriasUnicas = ["all", ...new Set(categorias)];
+// Cargar categorías
+function cargarCategorias() {
+  let select = document.getElementById("categoria");
+  if (!select) return;
+
+  let categorias = productos.map(p => p.category);
+  let categoriasUnicas = [...new Set(categorias)];
 
   categoriasUnicas.forEach(cat => {
-    let option = document.createElement("option");
-    option.value = cat;
-    option.textContent = cat;
-    filtroCategoria.appendChild(option);
+    select.innerHTML += `<option value="${cat}">${cat}</option>`;
   });
 }
 
-// AGREGAR AL CARRITO
-function agregarAlCarrito(id) {
+// Agregar al carrito
+function agregarCarrito(id) {
   let producto = productos.find(p => p.id === id);
   carrito.push(producto);
-  guardarCarrito();
-  actualizarCarrito();
+  localStorage.setItem("carrito", JSON.stringify(carrito));
+  alert("Producto agregado");
 }
 
-// MOSTRAR CARRITO
-function actualizarCarrito() {
-  itemsCarrito.innerHTML = "";
+// Mostrar carrito
+function mostrarCarrito() {
+  let contenedor = document.getElementById("carrito-lista");
+  let totalTexto = document.getElementById("total");
+  if (!contenedor) return;
+
+  contenedor.innerHTML = "";
   let total = 0;
 
-  carrito.forEach((prod, index) => {
-    let div = document.createElement("div");
-    div.innerHTML = `
-      <p>${prod.title} - $${prod.price}</p>
-      <button onclick="eliminarProducto(${index})"></button>
+  carrito.forEach((p, index) => {
+    total += p.price;
+    contenedor.innerHTML += `
+      <p>
+        ${p.title} - $${p.price}
+        <button onclick="eliminarProducto(${index})">X</button>
+      </p>
     `;
-    itemsCarrito.appendChild(div);
-    total += prod.price;
   });
 
-  totalCarrito.textContent = total.toFixed(2);
-  contadorCarrito.textContent = carrito.length;
+  totalTexto.innerText = "Total: $" + total.toFixed(2);
 }
 
-// ELIMINAR PRODUCTO
+// Eliminar producto
 function eliminarProducto(index) {
   carrito.splice(index, 1);
-  guardarCarrito();
-  actualizarCarrito();
-}
-
-// GUARDAR EN LOCALSTORAGE
-function guardarCarrito() {
   localStorage.setItem("carrito", JSON.stringify(carrito));
+  mostrarCarrito();
 }
 
-// FILTROS
-filtroCategoria.addEventListener("change", () => {
-  let valor = filtroCategoria.value;
+// Vaciar carrito
+function vaciarCarrito() {
+  carrito = [];
+  localStorage.removeItem("carrito");
+  mostrarCarrito();
+}
 
-  if (valor === "all") {
-    mostrarProductos(productos);
-  } else {
-    let filtrados = productos.filter(p => p.category === valor);
+// Eventos filtros
+let buscar = document.getElementById("buscar");
+if (buscar) {
+  buscar.addEventListener("input", () => {
+    let texto = buscar.value.toLowerCase();
+    let filtrados = productos.filter(p =>
+      p.title.toLowerCase().includes(texto)
+    );
     mostrarProductos(filtrados);
-  }
-});
+  });
+}
 
-// ORDENAR
-ordenar.addEventListener("change", () => {
-  let valor = ordenar.value;
-  let copia = [...productos];
+let categoria = document.getElementById("categoria");
+if (categoria) {
+  categoria.addEventListener("change", () => {
+    if (categoria.value === "all") {
+      mostrarProductos(productos);
+    } else {
+      let filtrados = productos.filter(p => p.category === categoria.value);
+      mostrarProductos(filtrados);
+    }
+  });
+}
 
-  if (valor === "precioAsc") {
-    copia.sort((a, b) => a.price - b.price);
-  }
+let ordenar = document.getElementById("ordenar");
+if (ordenar) {
+  ordenar.addEventListener("change", () => {
+    let copia = [...productos];
+    if (ordenar.value === "precio-asc") {
+      copia.sort((a, b) => a.price - b.price);
+    }
+    if (ordenar.value === "precio-desc") {
+      copia.sort((a, b) => b.price - a.price);
+    }
+    mostrarProductos(copia);
+  });
+}
 
-  if (valor === "precioDesc") {
-    copia.sort((a, b) => b.price - a.price);
-  }
-
-  if (valor === "nombre") {
-    copia.sort((a, b) => a.title.localeCompare(b.title));
-  }
-
-  mostrarProductos(copia);
-});
-
-// BUSCADOR
-buscador.addEventListener("input", () => {
-  let texto = buscador.value.toLowerCase();
-
-  let resultado = productos.filter(p =>
-    p.title.toLowerCase().includes(texto)
-  );
-
-  mostrarProductos(resultado);
-});
-
-buscador.addEventListener("input", () => {
-    let texto 
-})
-
+// Inicializar
+obtenerProductos();
+mostrarCarrito();
