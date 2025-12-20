@@ -74,6 +74,13 @@ fakestore/
 └── README.md
 
 
+## Wireframe
+
+![alt text](https://i.ibb.co/PVSDm33/screen.png)
+
+
+![alt text](https://i.ibb.co/Lh5V8jv9/screen.png)
+
 ### Descripción de los archivos
 
 - `index.html`: página principal del proyecto, contiene la presentación de la tienda y secciones informativas.
