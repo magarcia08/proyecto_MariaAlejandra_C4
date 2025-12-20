@@ -46,21 +46,31 @@ La estructura del proyecto está organizada de la siguiente forma:
 fakestore/
 │
 ├── index.html
+
 ├── catalogo.html
+
 ├── nosotros.html
+
 ├── carrito.html
+
 ├── contacto.html
 │
 ├── css/
+
 │ └── styles.css
 │
 ├── js/
+
 │ ├── app.js
+
 │ └── components/
+
 │ ├── navbar.js
+
 │ └── footer.js
 │
 ├── analisis.md
+
 └── README.md
 
 
